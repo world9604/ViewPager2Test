@@ -15,27 +15,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_main)
-
-        binding.lifecycleOwner = this
-
-        val pagerAdapter = PagerFragmentStateAdapter(this)
-        pagerAdapter.addFragment(FirstFragment())
-        pagerAdapter.addFragment(SecondFragment())
-        pagerAdapter.addFragment(ThirdFragment())
-
-        val viewPager = binding.pager
-        viewPager.adapter = pagerAdapter
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                Log.d("ViewPagerFragment", "Page ${position+1}")
+        // binding SetUp
+        val binding = (DataBindingUtil.setContentView(
+            this, R.layout.activity_main) as ActivityMainBinding)
+            .apply {
+                lifecycleOwner = this@MainActivity
             }
-        })
 
-        val tabLayout = binding.tabLayout
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        // 1.FragmentStateAdapter 초기화
+        val pagerAdapter = PagerFragmentStateAdapter(this)
+            .apply {
+                addFragment(FirstFragment())
+                addFragment(SecondFragment())
+                addFragment(ThirdFragment())
+            }
+
+        // 2.ViewPager2의 Adapter 설정
+        val viewPager: ViewPager2 = binding.pager.apply {
+            adapter = pagerAdapter
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    Log.d("ViewPagerFragment", "Page ${position+1}")
+                }
+            })
+        }
+
+        // 3.TabLayout과 ViewPager 연결
+        TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
             tab.text = "Tab ${position + 1}"
         }.attach()
     }

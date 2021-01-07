@@ -23,16 +23,4 @@ object AdapterBindings {
             }
         }
     }
-
-    @BindingAdapter("bind:src")
-    @JvmStatic
-    fun bindSrc(imageView: AppCompatImageView, imgKey: String?) {
-        Log.d(TEST, "bind:src : " + imgKey)
-        Picasso.get()
-                .load(imgKey)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .fit()
-                .into(imageView)
-    }
 }

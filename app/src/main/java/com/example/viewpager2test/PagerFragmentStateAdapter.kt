@@ -27,5 +27,4 @@ class PagerFragmentStateAdapter(fragmentActivity: FragmentActivity)
         fragments.removeAt(fragments.size - 1)
         notifyItemRemoved(fragments.size - 1)
     }
-
 }

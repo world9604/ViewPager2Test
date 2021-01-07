@@ -32,12 +32,11 @@ class SecondFragment : Fragment(){
             lifecycleOwner = viewLifecycleOwner
             viewModel = requireActivity().obtainViewModel(SecondItemViewModel::class.java)
             vm = viewModel
-            recyclerView.setHasFixedSize(true)
-            recyclerView.adapter =
-                SecondRecyclerViewAdapter(
-                    arrayListOf()
-                )
-            recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            recyclerView.apply {
+                setHasFixedSize(true)
+                adapter = SecondRecyclerViewAdapter(arrayListOf())
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
         }.root
     }
 

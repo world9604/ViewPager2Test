@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.viewpager2test.databinding.VerticalViewItemBinding
 import com.example.viewpager2test.dto.Item
 
-class SecondRecyclerViewAdapter(var items: List<Item>)
+class SecondRecyclerViewAdapter(private var items: List<Item>)
     :RecyclerView.Adapter<SecondRecyclerViewAdapter.VerticalViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VerticalViewHolder {
-        val binding = VerticalViewItemBinding
+        return VerticalViewItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return VerticalViewHolder(
-            binding
-        )
+            .run {
+                VerticalViewHolder(this)
+            }
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +30,7 @@ class SecondRecyclerViewAdapter(var items: List<Item>)
         notifyDataSetChanged()
     }
 
+    // ViewHolder
     class VerticalViewHolder(private val binding: VerticalViewItemBinding)
         :RecyclerView.ViewHolder(binding.root){
 
