@@ -1,4 +1,4 @@
-package com.example.viewpager2test
+package com.example.viewpager2test.fragment.secondFragment
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -33,7 +33,10 @@ class SecondFragment : Fragment(){
             viewModel = requireActivity().obtainViewModel(SecondItemViewModel::class.java)
             vm = viewModel
             recyclerView.setHasFixedSize(true)
-            recyclerView.adapter = SecondRecyclerViewAdapter(arrayListOf())
+            recyclerView.adapter =
+                SecondRecyclerViewAdapter(
+                    arrayListOf()
+                )
             recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         }.root
     }
@@ -44,7 +47,11 @@ class SecondFragment : Fragment(){
     }
 
     fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>) =
-        ViewModelProvider(viewModelStore, ViewModelFactory.getInstance(application)).get(viewModelClass)
+        ViewModelProvider(viewModelStore,
+            ViewModelFactory.getInstance(
+                application
+            )
+        ).get(viewModelClass)
 }
 
 
@@ -66,9 +73,12 @@ class ViewModelFactory private constructor()
         @Volatile private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance(application: Application) =
-            INSTANCE ?: synchronized(ViewModelFactory::class.java) {
-                INSTANCE ?: ViewModelFactory(
-                ).also { INSTANCE = it }
+            INSTANCE
+                ?: synchronized(ViewModelFactory::class.java) {
+                INSTANCE
+                    ?: ViewModelFactory(
+                    )
+                        .also { INSTANCE = it }
             }
 
         @VisibleForTesting

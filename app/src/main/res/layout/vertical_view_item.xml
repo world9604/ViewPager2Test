@@ -8,7 +8,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.viewpager2test.Item" />
+            type="com.example.viewpager2test.dto.Item" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -6,6 +6,9 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpager2test.databinding.ActivityMainBinding
+import com.example.viewpager2test.fragment.FirstFragment
+import com.example.viewpager2test.fragment.secondFragment.SecondFragment
+import com.example.viewpager2test.fragment.ThirdFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
